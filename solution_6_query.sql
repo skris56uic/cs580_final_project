@@ -1,0 +1,6 @@
+
+-- Query for Problem 6
+SELECT *
+FROM R1
+JOIN R2 ON R1.A2 = R2.A2
+JOIN R3 ON R2.A3 = R3.A3;
