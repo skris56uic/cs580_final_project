@@ -1,4 +1,4 @@
-# Problem 4 Report: Algorithm Comparison
+# Solution Report
 
 ## Dataset Generation
 
@@ -11,7 +11,7 @@ This dataset structure creates a scenario where joins are selective. $R_1$ joins
 
 ## Comparison Results
 
-I ran both algorithms on the generated dataset.
+I ran both algorithms on the generated dataset. The code can be found in `Solution.js`.
 
 | Algorithm | Execution Time | Number of Results |
 | :--- | :--- | :--- |

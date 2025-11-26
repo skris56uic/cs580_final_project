@@ -1,16 +1,16 @@
-# Problem 6 Report: MySQL Comparison
+# Solution Report
 
 ## Execution Instructions
 
-Since a MySQL server is not available in the current environment, I have generated the necessary SQL scripts to run the experiment on any MySQL instance.
+Since a MySQL server is not available in the current environment, I have generated the necessary SQL scripts to run the experiment on any MySQL instance. The code to generate these scripts can be found in `Solution.js`.
 
-1.  **`solution_6_dataset.sql`**: Contains the SQL commands to create tables `R1`, `R2`, `R3` and insert the "stress test" dataset generated in Problem 5.
-2.  **`solution_6_query.sql`**: Contains the 3-line join query.
+1.  **`Solution_dataset.sql`**: Contains the SQL commands to create tables `R1`, `R2`, `R3` and insert the "stress test" dataset generated in Problem 5.
+2.  **`Solution_query.sql`**: Contains the 3-line join query.
 
 To execute:
 ```bash
-mysql -u username -p < solution_6_dataset.sql
-mysql -u username -p < solution_6_query.sql
+mysql -u username -p < Solution_dataset.sql
+mysql -u username -p < Solution_query.sql
 ```
 
 ## Performance Analysis

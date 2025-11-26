@@ -1,11 +1,11 @@
-# Problem 2 Report: Generalized Line Join Algorithm
+# Solution Report
 
 ## Implementation Details
 
 I implemented a generalized version of the **Yannakakis algorithm** to evaluate $k$-line join queries of the form:
 $$q(A_1, \dots, A_{k+1}) :- R_1(A_1, A_2), R_2(A_2, A_3), \dots, R_k(A_k, A_{k+1})$$
 
-The implementation in `solution_2.js` handles arbitrary values of $k$ (tested up to $k=9$) using a dynamic approach rather than hardcoded steps.
+The implementation in `Solution.js` handles arbitrary values of $k$ (tested up to $k=9$) using a dynamic approach rather than hardcoded steps.
 
 ### Algorithm Steps
 

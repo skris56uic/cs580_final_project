@@ -1,8 +1,8 @@
-# Problem 3 Report: Sequential Hash Join
+# Solution Report
 
 ## Implementation Details
 
-I implemented a **Sequential Hash Join** (Left-Deep Plan) to evaluate the $k$-line join query. This approach builds the result incrementally by joining the accumulated result with the next relation in the sequence.
+I implemented a **Sequential Hash Join** (Left-Deep Plan) to evaluate the $k$-line join query. This approach builds the result incrementally by joining the accumulated result with the next relation in the sequence. The code can be found in `Solution.js`.
 
 ### Algorithm Steps
 

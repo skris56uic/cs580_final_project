@@ -1,4 +1,4 @@
-# Problem 5 Report: Stress Test Analysis
+# Solution Report
 
 ## Dataset Structure
 
@@ -13,6 +13,7 @@ The dataset was specifically designed to "stress test" the Sequential Join algor
 *   **$R_3$**: Mostly contains random values for $A_3$ that **do not match** the results from $R_1 \bowtie R_2$. The only matching path is via the specific "needle in the haystack" tuples (e.g., $(2002, 8)$ in $R_2$ matching $(8, 30)$ in $R_3$).
 
 ## Comparison Results
+I ran both algorithms on the generated dataset. The code can be found in `Solution.js`.
 
 | Algorithm | Execution Time | Number of Results |
 | :--- | :--- | :--- |

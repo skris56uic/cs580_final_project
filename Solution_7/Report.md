@@ -1,4 +1,4 @@
-# Problem 7 Report: GJ, GHW, FHW
+# Solution Report
 
 ## Part 1: Generic Join (GJ)
 
@@ -80,7 +80,7 @@ $O(N^{FHW})$. Since the FHW of the triangle sub-query is 1.5, the complexity is 
 
 ## Part 4: Experimental Comparison
 
-I ran the algorithms on a synthetic dataset with $N=2000$ tuples per relation.
+I ran the algorithms on a synthetic dataset with $N=2000$ tuples per relation. The code can be found in `Solution.js`.
 
 | Algorithm | Running Time | Asymptotic Complexity |
 | :--- | :--- | :--- |

@@ -36,7 +36,7 @@ The project is organized into folders corresponding to each problem statement. E
 ## Prerequisites
 
 *   **Node.js**: Ensure Node.js is installed on your system to run the solution scripts.
-*   **MySQL** (Optional): Required only for running the SQL scripts in `Solution_6`.
+*   **MySQL**: Required only for running the SQL scripts in `Solution_6`.
 
 ## How to Run
 
