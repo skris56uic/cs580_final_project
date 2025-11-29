@@ -2,7 +2,7 @@
 
 ## Implementation Details
 
-I implemented a generalized version of the **Yannakakis algorithm** to evaluate $k$-line join queries of the form:
+We implemented a generalized version of the **Yannakakis algorithm** to evaluate $k$-line join queries of the form:
 $$q(A_1, \dots, A_{k+1}) :- R_1(A_1, A_2), R_2(A_2, A_3), \dots, R_k(A_k, A_{k+1})$$
 
 The implementation in `Solution.js` handles arbitrary values of $k$ (tested up to $k=9$) using a dynamic approach rather than hardcoded steps.
@@ -45,7 +45,7 @@ The algorithm maintains the optimal **$O(N + OUT)$** time complexity for any con
 
 ## Execution Results
 
-I ran the generalized algorithm with three test cases:
+We ran the generalized algorithm with three test cases:
 
 ### Case 1: k=3 (Original Example)
 *   **Input**: 3 relations with 5 tuples each (plus noise).

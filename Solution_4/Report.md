@@ -2,7 +2,7 @@
 
 ## Dataset Generation
 
-I generated a random dataset as specified:
+We generated a random dataset as specified:
 *   **$R_1$**: 100 tuples $(i, x)$ where $i \in [1, 100]$ and $x$ is random in $[1, 5000]$.
 *   **$R_2$**: 100 tuples $(y, j)$ where $j \in [1, 100]$ and $y$ is random in $[1, 5000]$.
 *   **$R_3$**: 100 tuples $(l, l)$ where $l \in [1, 100]$.
@@ -11,7 +11,7 @@ This dataset structure creates a scenario where joins are selective. $R_1$ joins
 
 ## Comparison Results
 
-I ran both algorithms on the generated dataset. The code can be found in `Solution.js`.
+We ran both algorithms on the generated dataset. The code can be found in `Solution.js`.
 
 | Algorithm | Execution Time | Number of Results |
 | :--- | :--- | :--- |

@@ -2,18 +2,18 @@
 
 ## Implementation Details
 
-I implemented the hash join algorithm in Node.js to evaluate the query $q(A,B,C) :- R_{1}(A,B), R_{2}(B,C)$. The code can be found in `Solution.js`.
+We implemented the hash join algorithm in Node.js to evaluate the query $q(A,B,C) :- R_{1}(A,B), R_{2}(B,C)$. The code can be found in `Solution.js`.
 
 The implementation steps are as follows:
 
-1.  **Data Structures**: I represented relations $R_1$ and $R_2$ as arrays of objects, where each object represents a tuple with named attributes (e.g., `{ A: 1, B: 10 }`).
-2.  **Hash Phase**: I created a hash map (using a JavaScript `Map`) for relation $R_2$.
+1.  **Data Structures**: We represented relations $R_1$ and $R_2$ as arrays of objects, where each object represents a tuple with named attributes (e.g., `{ A: 1, B: 10 }`).
+2.  **Hash Phase**: We created a hash map (using a JavaScript `Map`) for relation $R_2$.
     *   The key for the hash map is the join attribute `B`.
     *   The value is a list of tuples from $R_2$ that have that specific value for `B`. This handles cases where multiple tuples in $R_2$ share the same join key.
-3.  **Probe Phase**: I iterated through each tuple in relation $R_1$.
-    *   For each tuple $t_1 \in R_1$, I extracted the value of attribute `B`.
-    *   I probed the hash map with this key.
-    *   If a match was found, I iterated through the list of matching $R_2$ tuples and produced a result tuple $(A, B, C)$ for each match.
+3.  **Probe Phase**: We iterated through each tuple in relation $R_1$.
+    *   For each tuple $t_1 \in R_1$, We extracted the value of attribute `B`.
+    *   We probed the hash map with this key.
+    *   If a match was found, We iterated through the list of matching $R_2$ tuples and produced a result tuple $(A, B, C)$ for each match.
 
 ## Correctness
 
@@ -24,7 +24,7 @@ The algorithm is correct because it faithfully implements the definition of a na
 
 ## Execution Results
 
-I ran the algorithm with a dataset of 10 tuples for $R_1$ and 10 tuples for $R_2$.
+We ran the algorithm with a dataset of 10 tuples for $R_1$ and 10 tuples for $R_2$.
 
 **Relation R1(A, B):**
 | A | B |
