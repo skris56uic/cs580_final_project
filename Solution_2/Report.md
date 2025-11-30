@@ -29,7 +29,7 @@ The implementation in `Solution.js` handles arbitrary values of $k$ (tested up t
 
 ## Complexity Analysis
 
-The algorithm maintains the optimal **$O(N + OUT)$** time complexity for any constant $k$.
+The exact complexity of the algorithm is **$O(N + OUT)$**. This ensures the solution meets the requirement of linear behavior with respect to the input size $N$ and output size $OUT$.
 
 1.  **Reduction Phase**:
     *   We perform $2(k-1)$ semijoin operations.

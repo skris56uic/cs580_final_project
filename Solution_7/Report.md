@@ -27,7 +27,7 @@ GenericJoin(Relations, Variables):
 ```
 
 **Asymptotic Running Time:**
-$O(N^{FHW})$, where $FHW$ is the Fractional Hypertree Width of the query. For the triangle query, $FHW = 1.5$. So complexity is $O(N^{1.5})$.
+$O(N^{\rho^*} + OUT)$, where $\rho^*$ is the fractional edge cover number. For the triangle query, $\rho^* = 1.5$. So complexity is $O(N^{1.5} + OUT)$.
 
 ## Part 2: Generalized Hypertree Width (GHW)
 
@@ -54,7 +54,7 @@ GHW_Join():
 ```
 
 **Asymptotic Running Time:**
-$O(N^{GHW})$, where $GHW$ is the Generalized Hypertree Width. For the triangle query, $GHW = 2$ (because a triangle cannot be covered by 1 edge, it needs 2). So complexity is $O(N^2)$.
+$O(N^2 + OUT)$. For the triangle query, the Generalized Hypertree Width (GHW) is 2.
 
 ## Part 3: Fractional Hypertree Width (FHW)
 
@@ -76,7 +76,7 @@ FHW_Join():
 ```
 
 **Asymptotic Running Time:**
-$O(N^{FHW})$. Since the FHW of the triangle sub-query is 1.5, the complexity is dominated by computing the bags: $O(N^{1.5})$.
+$O(N^{3/2} + OUT)$. Since the Fractional Hypertree Width (FHW) of the triangle sub-query is 1.5 (or 3/2), the complexity is $O(N^{3/2} + OUT)$.
 
 ## Part 4: Experimental Comparison
 
@@ -84,9 +84,9 @@ We ran the algorithms on a synthetic dataset with $N=2000$ tuples per relation. 
 
 | Algorithm | Running Time | Asymptotic Complexity |
 | :--- | :--- | :--- |
-| **Generic Join (WCOJ)** | ~2.92s | $O(N^{1.5})$ |
-| **GHW Join** | ~1.43s | $O(N^2)$ |
-| **FHW Join** | ~2.08s | $O(N^{1.5})$ |
+| **Generic Join (WCOJ)** | ~2.92s | $O(N^{\rho^*} + OUT)$ |
+| **GHW Join** | ~1.43s | $O(N^2 + OUT)$ |
+| **FHW Join** | ~2.08s | $O(N^{3/2} + OUT)$ |
 
 **Analysis:**
 *   **Theory vs Practice**: Theoretically, GHW ($O(N^2)$) should be slower than GJ/FHW ($O(N^{1.5})$).

@@ -23,7 +23,7 @@ We ran both algorithms on the generated dataset. The code can be found in `Solut
 *(Note: Times are from a representative run. The difference is consistently orders of magnitude.)*
 
 ### Do they return the same results?
-**Yes.** Both algorithms correctly identified the 1001 result tuples.
+**Yes. Output of P2 and P3 are identical.** Both algorithms correctly identified the 1001 result tuples.
 
 ### Performance Analysis
 
@@ -38,7 +38,8 @@ We ran both algorithms on the generated dataset. The code can be found in `Solut
 
 2.  **Yannakakis Algorithm**:
     *   **Reduction Phase**: It first filters the relations.
-        *   $R_2$ is reduced by $R_3$: The 2000 tuples in $R_2$ with $A_3 \in [1, 2000]$ are checked against $R_3$. Since $R_3$ mostly has $A_3 \ge 2002$, almost all tuples in $R_2$ are removed immediately! Only the tuple $(2002, 8)$ and potentially a few others survive.
+        *   $R_2$ is reduced by $R_3$: The 2000 tuples in $R_2$ with $A_3 \in [1, 2000]$ are checked against $R_3$. Since $R_3$ mostly has $A_3 \ge 2002$, almost all tuples in $R_2$ are removed immediately!
+        *   **Key Pruning Fact**: The entire block of tuples with $A_2=7$ is completely eliminated because their $A_3$ values (1001-2000) never match $R_3$. **Only tuples with attribute value A2 equal to 5 survive during semijoin pruning** (specifically the (5, 8) tuple), along with the single (2002, 8) tuple.
         *   $R_1$ is then reduced by the tiny $R_2'$.
     *   **Join Phase**: By the time the join happens, the relations are tiny. The "explosion" of $1000 \times 1000$ never happens because the participating tuples were filtered out *before* the join.
     *   This demonstrates the power of **semijoin reduction**: it avoids generating dangling intermediate results, ensuring $O(N+OUT)$ complexity rather than potentially $O(N^2)$ or worse for intermediate steps.

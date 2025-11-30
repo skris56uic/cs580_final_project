@@ -21,7 +21,7 @@ We ran both algorithms on the generated dataset. The code can be found in `Solut
 *(Note: Exact execution times vary by run, but are generally very fast for this small dataset size.)*
 
 ### Do they return the same results?
-**Yes.** The result sets are identical. Both algorithms correctly compute the natural join of the three relations.
+**Yes, they return the same results.** The result sets are identical. We verified this by sorting both result sets and comparing them, confirming that both algorithms correctly compute the natural join of the three relations.
 
 ### Running Time Analysis
 For this specific small dataset ($N=100$), the **Sequential Join** was slightly faster.
