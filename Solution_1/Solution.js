@@ -1,4 +1,3 @@
-// Hash Join Implementation in Node.js
 
 // 1. Create a dataset with 10 tuples in R1 and 10 tuples in R2.
 // R1(A, B)
