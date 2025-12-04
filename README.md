@@ -8,27 +8,27 @@ The project is organized into folders corresponding to each problem statement. E
 
 ```
 .
-├── Solution_1/          # Problem 1: Hash Join
-│   ├── Solution.js      # Node.js implementation
-│   └── Report.pdf        # Report and analysis
-├── Solution_2/          # Problem 2: Yannakakis Algorithm (Line Join)
+├── Solution_1/                    # Problem 1: Hash Join
+│   ├── Solution.js                # Node.js implementation
+│   └── Report.pdf                 # Report and analysis
+├── Solution_2/                    # Problem 2: Yannakakis Algorithm (Line Join)
 │   ├── Solution.js
 │   └── Report.pdf
-├── Solution_3/          # Problem 3: Sequential Hash Join (Left-Deep)
+├── Solution_3/                    # Problem 3: Sequential Hash Join (Left-Deep)
 │   ├── Solution.js
 │   └── Report.pdf
-├── Solution_4/          # Problem 4: Comparison (Yannakakis vs Sequential)
+├── Solution_4/                    # Problem 4: Comparison (Yannakakis vs Sequential)
 │   ├── Solution.js
 │   └── Report.pdf
-├── Solution_5/          # Problem 5: Stress Test Comparison
+├── Solution_5/                    # Problem 5: Stress Test Comparison
 │   ├── Solution.js
 │   └── Report.pdf
-├── Solution_6/          # Problem 6: SQL Comparison
-│   ├── Solution.js      # Script to generate SQL files
+├── Solution_6/                    # Problem 6: SQL Comparison
+│   ├── Solution.js                # Script to generate SQL files
 │   ├── solution_6_dataset.sql
 │   ├── solution_6_query.sql
 │   └── Report.pdf
-└── Solution_7/          # Problem 7: GJ, GHW, FHW Comparison
+└── Solution_7/                    # Problem 7: GJ, GHW, FHW Comparison
     ├── Solution.js
     └── Report.pdf
 ```
