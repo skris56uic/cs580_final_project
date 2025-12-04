@@ -2,7 +2,7 @@
 
 ## Implementation Details
 
-We implemented a **Sequential Hash Join** (Left-Deep Plan) to evaluate the $k$-line join query. This approach builds the result incrementally by joining the accumulated result with the next relation in the sequence. The code can be found in `Solution.js`.
+We implemented a **Sequential Hash Join** (Left-Deep Plan) to evaluate the $k$-line join query. This approach builds the result incrementally by joining the accumulated result with the next relation in the sequence. The code can be found in [Solution.js](https://github.com/skris56uic/cs580_final_project/blob/main/Solution_3/Solution.js).
 
 ### Algorithm Steps
 

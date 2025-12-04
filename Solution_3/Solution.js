@@ -1,4 +1,4 @@
-// Sequential Hash Join (Left-Deep) in Node.js
+// Sequential Hash Join (Left-Deep)
 // Query: q(A1, ..., Ak+1) :- R1(A1, A2), R2(A2, A3), ..., Rk(Ak, Ak+1)
 
 // Generic Hash Join Function
@@ -7,8 +7,7 @@ function hashJoin(leftRel, rightRel, joinAttr) {
     const results = [];
     const hashMap = new Map();
 
-    // 1. Build Phase: Hash the right relation (usually smaller in optimizer logic, but here fixed)
-    // We'll hash the right relation as per standard hash join description in Problem 1
+    // 1. Build Phase: Hash right relation.
     for (const tuple of rightRel) {
         const key = tuple[joinAttr];
         if (!hashMap.has(key)) {
@@ -23,10 +22,7 @@ function hashJoin(leftRel, rightRel, joinAttr) {
         if (hashMap.has(key)) {
             const matchingTuples = hashMap.get(key);
             for (const rightTuple of matchingTuples) {
-                // Merge tuples
-                // Note: We need to be careful not to duplicate the join key if we want a clean output,
-                // but for simplicity of "A1...Ak+1", we can just merge objects.
-                // The join key exists in both, so it will just be overwritten with the same value.
+                // Merge tuples (join key overwritten)
                 results.push({ ...leftTuple, ...rightTuple });
             }
         }
@@ -45,9 +41,7 @@ function sequentialJoin(relations) {
     // Iterate through the rest of the relations
     for (let i = 1; i < relations.length; i++) {
         const nextRelation = relations[i];
-        // Join attribute between R_prev (ending in A_{i+1}) and R_next (starting with A_{i+1})
-        // is A_{i+1}.
-        // Example: i=1 (2nd relation). Join R1(A1,A2) and R2(A2,A3) on A2.
+        // Join attribute is A_{i+1}
         const joinAttr = `A${i + 1}`;
 
         console.log(`Step ${i}: Joining with R${i + 1} on ${joinAttr}...`);
@@ -58,7 +52,7 @@ function sequentialJoin(relations) {
 
         console.log(`  Result Size: ${currentResult.length}`);
 
-        // Optimization: If intermediate result is empty, we can stop early
+        // Stop if intermediate result is empty
         if (currentResult.length === 0) {
             console.log("  Intermediate result empty. Stopping.");
             break;

@@ -11,26 +11,17 @@ function generateDataset() {
     const R2 = [];
     const R3 = [];
 
-    // R1: 100 tuples (i, x) where i=1..100, x in [1, 5000]
-    // Schema: A1, A2
+    // R1: 100 tuples (A1, A2)
     for (let i = 1; i <= 100; i++) {
         R1.push({ A1: i, A2: getRandomInt(1, 5000) });
     }
 
-    // R2: 100 tuples (y, j) where j=1..100, y in [1, 5000]
-    // Schema: A2, A3
-    // Note: The problem says (y, j). Let's assume y is the join attribute with R1 (A2) and j is the join attribute with R3 (A3).
-    // Wait, let's check the query structure: q(A1,A2,A3,A4) :- R1(A1,A2), R2(A2,A3), R3(A3,A4)
-    // R1(A1, A2). R1 has (i, x). So A1=i, A2=x.
-    // R2(A2, A3). R2 has (y, j). So A2=y, A3=j.
-    // R3(A3, A4). R3 has (l, l). So A3=l, A4=l.
-
+    // R2: 100 tuples (A2, A3)
     for (let j = 1; j <= 100; j++) {
         R2.push({ A2: getRandomInt(1, 5000), A3: j });
     }
 
-    // R3: 100 tuples (l, l) where l=1..100
-    // Schema: A3, A4
+    // R3: 100 tuples (A3, A4)
     for (let l = 1; l <= 100; l++) {
         R3.push({ A3: l, A4: l });
     }

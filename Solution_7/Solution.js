@@ -18,10 +18,6 @@ function generateDataset() {
     }
 
     // Triangle 1: {A1, A2, A3}
-    // R1(A1, A2), R2(A2, A3), R3(A1, A3)
-    // To make pairwise joins heavy but triangle small:
-    // Make R1, R2 dense. Make R3 sparse or selective.
-    // Actually, random uniform with small domain is usually good enough to show WCOJ benefit.
     const R1 = randomRel(N, D).map(t => ({ A1: t.col1, A2: t.col2 }));
     const R2 = randomRel(N, D).map(t => ({ A2: t.col1, A3: t.col2 }));
     const R3 = randomRel(N, D).map(t => ({ A1: t.col1, A3: t.col2 }));
@@ -30,7 +26,6 @@ function generateDataset() {
     const R4 = randomRel(N, D).map(t => ({ A3: t.col1, A4: t.col2 }));
 
     // Triangle 2: {A4, A5, A6}
-    // R5(A4, A5), R6(A5, A6), R7(A4, A6)
     const R5 = randomRel(N, D).map(t => ({ A4: t.col1, A5: t.col2 }));
     const R6 = randomRel(N, D).map(t => ({ A5: t.col1, A6: t.col2 }));
     const R7 = randomRel(N, D).map(t => ({ A4: t.col1, A6: t.col2 }));
@@ -71,11 +66,6 @@ function hashJoin(leftRel, rightRel, leftAttr, rightAttr) {
 
 function genericJoin(data) {
     // Variable ordering: A1, A2, A3, A4, A5, A6
-    // Relations:
-    // A1: R1(A1, A2), R3(A1, A3)
-    // A2: R1(A1, A2), R2(A2, A3)
-    // A3: R2(A2, A3), R3(A1, A3), R4(A3, A4)
-    // ...
 
     // Build indices for fast lookups
     const idxR1_A1 = buildIndex(data.R1, 'A1');
@@ -100,8 +90,7 @@ function genericJoin(data) {
 
     const results = [];
 
-    // Iterate A1 (Domain: keys of R1 or R3)
-    // Optimization: intersection of domains
+    // Iterate A1 (Intersection of R1 and R3 keys)
     const domainA1 = new Set([...idxR1_A1.keys()].filter(k => idxR3_A1.has(k)));
 
     for (const a1 of domainA1) {
@@ -109,11 +98,10 @@ function genericJoin(data) {
         const candidatesA2 = idxR1_A1.get(a1).map(t => t.A2);
 
         for (const a2 of candidatesA2) {
-            // Check if valid in R2(A2, *)? Not strictly needed if we check intersection later,
-            // but for WCOJ we usually intersect valid ranges.
+            // Check validity in R2
             if (!idxR2_A2.has(a2)) continue;
 
-            // Iterate A3 (constrained by R2(a2, A3) AND R3(a1, A3) AND R4(A3, *))
+            // Iterate A3 (constrained by R2, R3, R4)
             const c1 = idxR2_A2.get(a2).map(t => t.A3);
             const c2 = idxR3_A1.get(a1).map(t => t.A3); // R3(a1, A3)
             // Intersect
@@ -121,19 +109,19 @@ function genericJoin(data) {
             const validA3 = c1.filter(val => s2.has(val) && idxR4_A3.has(val));
 
             for (const a3 of validA3) {
-                // Iterate A4 (constrained by R4(a3, A4) AND R5(A4, *) AND R7(A4, *))
+                // Iterate A4 (constrained by R4, R5, R7)
                 const candidatesA4 = idxR4_A3.get(a3).map(t => t.A4);
 
                 for (const a4 of candidatesA4) {
                     if (!idxR5_A4.has(a4) || !idxR7_A4.has(a4)) continue;
 
-                    // Iterate A5 (constrained by R5(a4, A5) AND R6(A5, *))
+                    // Iterate A5 (constrained by R5, R6)
                     const candidatesA5 = idxR5_A4.get(a4).map(t => t.A5);
 
                     for (const a5 of candidatesA5) {
                         if (!idxR6_A5.has(a5)) continue;
 
-                        // Iterate A6 (constrained by R6(a5, A6) AND R7(a4, A6))
+                        // Iterate A6 (constrained by R6, R7)
                         const cA6_1 = idxR6_A5.get(a5).map(t => t.A6);
                         const cA6_2 = idxR7_A4.get(a4).map(t => t.A6);
                         const sA6_2 = new Set(cA6_2);
@@ -154,26 +142,9 @@ function genericJoin(data) {
 // --- Algorithm 2: GHW (Standard Join on Decomposition) ---
 
 function ghwJoin(data) {
-    // Decomposition:
-    // Bag 1: {A1, A2, A3} -> R1, R2, R3
-    // Bag 2: {A4, A5, A6} -> R5, R6, R7
-    // Connected by R4(A3, A4)
+    // Decomposition: Bag 1 {A1,A2,A3}, Bag 2 {A4,A5,A6}, connected by R4.
 
-    // Compute Bag 1 using Standard Hash Joins
-    // (R1 join R2) join R3
-    const r1r2 = hashJoin(data.R1, data.R2, 'A2', 'A2'); // Result: {A1, A2, A3}
-    const bag1 = hashJoin(r1r2, data.R3, 'A1', 'A1')
-        .filter(t => t.A3 === t.A3); // Check consistency on A3 (hashJoin merges, but we need to ensure R3.A3 == R2.A3)
-    // Wait, hashJoin above joined on A1. The result has A3 from R2 and A3 from R3.
-    // My simple hashJoin merges objects. If keys collide, right overwrites left.
-    // So we need to be careful.
-    // Let's refine hashJoin or filter explicitly.
-
-    // Refined Bag 1 computation:
-    // 1. Join R1(A1,A2) and R2(A2,A3) -> Temp(A1,A2,A3)
-    // 2. Filter Temp where (A1,A3) exists in R3
-
-    // Re-implementing specific logic for correctness:
+    // Bag 1: (R1 join R2) filtered by R3
     const idxR3 = new Set(data.R3.map(t => `${t.A1},${t.A3}`));
     const bag1Results = [];
     const idxR2_A2 = buildIndex(data.R2, 'A2');
@@ -188,8 +159,7 @@ function ghwJoin(data) {
         }
     }
 
-    // Compute Bag 2 using Standard Hash Joins
-    // (R5 join R6) join R7
+    // Bag 2: (R5 join R6) filtered by R7
     const idxR7 = new Set(data.R7.map(t => `${t.A4},${t.A6}`));
     const bag2Results = [];
     const idxR6_A5 = buildIndex(data.R6, 'A5');
@@ -205,7 +175,6 @@ function ghwJoin(data) {
     }
 
     // Join Bag 1, R4, Bag 2
-    // Bag 1(A1,A2,A3) join R4(A3,A4) join Bag 2(A4,A5,A6)
     const left = hashJoin(bag1Results, data.R4, 'A3', 'A3');
     const final = hashJoin(left, bag2Results, 'A4', 'A4');
 
@@ -215,8 +184,7 @@ function ghwJoin(data) {
 // --- Algorithm 3: FHW (WCOJ on Decomposition) ---
 
 function fhwJoin(data) {
-    // Decomposition: Same bags.
-    // Compute Bag 1 using WCOJ logic (Generic Join on Triangle)
+    // Decomposition: Same bags. Compute Bag 1 with WCOJ.
 
     function wcojTriangle1() {
         const results = [];

@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// --- Dataset Generation (Same as Problem 5) ---
+// --- Dataset Generation ---
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {

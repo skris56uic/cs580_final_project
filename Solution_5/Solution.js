@@ -15,11 +15,11 @@ function generateDataset() {
     const R3 = [];
 
     // R1:
-    // 1. 1000 tuples (i, 5) for i=1..1000
+    // 1. 1000 tuples (i, 5)
     for (let i = 1; i <= 1000; i++) {
         R1.push({ A1: i, A2: 5 });
     }
-    // 2. 1000 tuples (i, 7) for i=1001..2000
+    // 2. 1000 tuples (i, 7)
     for (let i = 1001; i <= 2000; i++) {
         R1.push({ A1: i, A2: 7 });
     }
@@ -29,11 +29,11 @@ function generateDataset() {
     shuffleArray(R1);
 
     // R2:
-    // 1. 1000 tuples (5, i) for i=1..1000
+    // 1. 1000 tuples (5, i)
     for (let i = 1; i <= 1000; i++) {
         R2.push({ A2: 5, A3: i });
     }
-    // 2. 1000 tuples (7, i) for i=1001..2000
+    // 2. 1000 tuples (7, i)
     for (let i = 1001; i <= 2000; i++) {
         R2.push({ A2: 7, A3: i });
     }
@@ -43,7 +43,7 @@ function generateDataset() {
     shuffleArray(R2);
 
     // R3:
-    // 1. 2000 random tuples (x, y) with x in [2002, 3000], y in [1, 3000]
+    // 1. 2000 random tuples (x, y)
     for (let k = 0; k < 2000; k++) {
         const x = Math.floor(Math.random() * (3000 - 2002 + 1)) + 2002;
         const y = Math.floor(Math.random() * 3000) + 1;

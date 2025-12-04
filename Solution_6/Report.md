@@ -2,10 +2,10 @@
 
 ## Execution Instructions
 
-Since a MySQL server is not available in the current environment, We have generated the necessary SQL scripts to run the experiment on any MySQL instance. The code to generate these scripts can be found in `Solution.js`.
+Since a MySQL server is not available in the current environment, We have generated the necessary SQL scripts to run the experiment on any MySQL instance. The code to generate these scripts can be found in [Solution.js](https://github.com/skris56uic/cs580_final_project/blob/main/Solution_6/Solution.js).
 
-1.  **`Solution_dataset.sql`**: Contains the SQL commands to create tables `R1`, `R2`, `R3` and insert the "stress test" dataset generated in Problem 5.
-2.  **`Solution_query.sql`**: Contains the 3-line join query.
+1.  **[Solution_dataset.sql](https://github.com/skris56uic/cs580_final_project/blob/main/Solution_6/Solution_dataset.sql)**: Contains the SQL commands to create tables `R1`, `R2`, `R3` and insert the "stress test" dataset generated in Problem 5.
+2.  **[Solution_query.sql](https://github.com/skris56uic/cs580_final_project/blob/main/Solution_6/Solution_query.sql)**: Contains the 3-line join query.
 
 To execute:
 ```bash

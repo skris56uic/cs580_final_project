@@ -2,7 +2,7 @@
 
 ## Implementation Details
 
-We implemented the hash join algorithm in Node.js to evaluate the query $q(A,B,C) :- R_{1}(A,B), R_{2}(B,C)$. The code can be found in `Solution.js`.
+We implemented the hash join algorithm in Node.js to evaluate the query $q(A,B,C) :- R_{1}(A,B), R_{2}(B,C)$. The code can be found in [Solution.js](https://github.com/skris56uic/cs580_final_project/blob/main/Solution_1/Solution.js).
 
 The implementation steps are as follows:
 

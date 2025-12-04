@@ -11,7 +11,7 @@ This dataset structure creates a scenario where joins are selective. $R_1$ joins
 
 ## Comparison Results
 
-We ran both algorithms on the generated dataset. The code can be found in `Solution.js`.
+We ran both algorithms on the generated dataset. The code can be found in [Solution.js](https://github.com/skris56uic/cs580_final_project/blob/main/Solution_4/Solution.js).
 
 | Algorithm | Execution Time | Number of Results |
 | :--- | :--- | :--- |

@@ -1,4 +1,4 @@
-// Generalized Line Join Algorithm (Yannakakis) in Node.js
+// Generalized Line Join Algorithm (Yannakakis)
 // Query: q(A1, ..., Ak+1) :- R1(A1, A2), R2(A2, A3), ..., Rk(Ak, Ak+1)
 
 // Helper function to build hash index
@@ -32,15 +32,7 @@ function generalizedLineJoin(relations) {
     console.log("--- Reduction Phase ---");
 
     // 1. Semijoin Reduction (Right-to-Left)
-    // For i = k-1 down to 1: Ri = Ri semijoin R(i+1)
-    // Note: Array is 0-indexed. R1 is at index 0.
-    // Loop i from k-2 down to 0.
-    // Ri (index i) joins with R(i+1) (index i+1) on attribute A(i+2)
-    // Naming convention: R_i has attributes A_i, A_{i+1}
-    // Join attribute between R[i] and R[i+1] is A_{i+2} (using 1-based attribute naming)
-    // Let's stick to the property names in the objects.
-    // We assume R[i] has keys `A${i+1}` and `A${i+2}`.
-    // Join key between R[i] and R[i+1] is `A${i+2}`.
+    // Reduce R_i by R_{i+1} from end to start.
 
     for (let i = k - 2; i >= 0; i--) {
         const joinAttr = `A${i + 2}`;
@@ -50,9 +42,7 @@ function generalizedLineJoin(relations) {
     }
 
     // 2. Semijoin Reduction (Left-to-Right)
-    // For i = 2 up to k: Ri = Ri semijoin R(i-1)
-    // Loop i from 1 to k-1.
-    // Ri (index i) joins with R(i-1) (index i-1) on attribute A(i+1)
+    // Reduce R_i by R_{i-1} from start to end.
     for (let i = 1; i < k; i++) {
         const joinAttr = `A${i + 1}`;
         const originalSize = rels[i].length;
@@ -77,17 +67,6 @@ function generalizedLineJoin(relations) {
             results.push({ ...currentResult });
             return;
         }
-
-        // Current relation is rels[relIndex] (but we use index lookup for >0)
-        // If relIndex is 0, we are starting.
-        // Actually, better to structure DFS as:
-        // Match tuple in R[i], then find matches in R[i+1]...
-
-        // We already have a tuple from R[relIndex-1] in 'currentTuple' (if relIndex > 0)
-        // We need to find matches in R[relIndex]
-
-        // This is slightly different structure. Let's restart DFS logic.
-        // We iterate R0. For each t0, we recurse to find matches in R1, etc.
     }
 
     // Redefine DFS
@@ -111,7 +90,6 @@ function generalizedLineJoin(relations) {
 
         for (const tuple of candidates) {
             // Merge tuple into result
-            // Note: simple merge might overwrite if keys duplicate, but here keys are unique A1..Ak+1
             const newResult = { ...currentResultBuilder, ...tuple };
             findMatches(level + 1, tuple, newResult);
         }
@@ -129,8 +107,7 @@ function generateChain(k, n) {
     for (let i = 0; i < k; i++) {
         const rel = [];
         for (let j = 0; j < n; j++) {
-            // Generate a simple chain: 1->1, 2->2, etc.
-            // Plus some noise
+            // Generate chain with noise
             rel.push({
                 [`A${i + 1}`]: j,
                 [`A${i + 2}`]: j
@@ -150,7 +127,7 @@ function generateChain(k, n) {
 
 // --- Execution ---
 
-// Case 1: k=3 (Original Example)
+// Case 1: k=3
 const R1 = [
     { A1: 1, A2: 10 }, { A1: 2, A2: 20 }, { A1: 3, A2: 30 }, { A1: 4, A2: 40 }, { A1: 5, A2: 50 }
 ];

@@ -80,7 +80,7 @@ $O(N^{3/2} + OUT)$. Since the Fractional Hypertree Width (FHW) of the triangle s
 
 ## Part 4: Experimental Comparison
 
-We ran the algorithms on a synthetic dataset with $N=2000$ tuples per relation. The code can be found in `Solution.js`.
+We ran the algorithms on a synthetic dataset with $N=2000$ tuples per relation. The code can be found in [Solution.js](https://github.com/skris56uic/cs580_final_project/blob/main/Solution_7/Solution.js).
 
 | Algorithm | Running Time | Asymptotic Complexity |
 | :--- | :--- | :--- |
