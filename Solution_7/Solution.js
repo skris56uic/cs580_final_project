@@ -1,5 +1,3 @@
-// Problem 7: GJ, GHW, FHW Comparison
-
 // --- Dataset Generation ---
 
 function generateDataset() {

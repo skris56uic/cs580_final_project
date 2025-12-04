@@ -1,5 +1,3 @@
-// Problem 6: SQL Dataset Generation
-
 const fs = require('fs');
 const path = require('path');
 

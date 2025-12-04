@@ -1,6 +1,3 @@
-// Generalized Line Join Algorithm (Yannakakis)
-// Query: q(A1, ..., Ak+1) :- R1(A1, A2), R2(A2, A3), ..., Rk(Ak, Ak+1)
-
 // Helper function to build hash index
 function buildIndex(relation, keyAttr) {
     const index = new Map();
@@ -61,16 +58,7 @@ function generalizedLineJoin(relations) {
     }
 
     // Recursive DFS function
-    function dfs(relIndex, currentTuple, currentResult) {
-        // Base case: we have matched all relations
-        if (relIndex === k) {
-            results.push({ ...currentResult });
-            return;
-        }
-    }
-
-    // Redefine DFS
-    function findMatches(level, previousTuple, currentResultBuilder) {
+    function dfs(level, previousTuple, currentResultBuilder) {
         if (level === k) {
             results.push(currentResultBuilder);
             return;
@@ -91,11 +79,11 @@ function generalizedLineJoin(relations) {
         for (const tuple of candidates) {
             // Merge tuple into result
             const newResult = { ...currentResultBuilder, ...tuple };
-            findMatches(level + 1, tuple, newResult);
+            dfs(level + 1, tuple, newResult);
         }
     }
 
-    findMatches(0, null, {});
+    dfs(0, null, {});
     return results;
 }
 
@@ -127,34 +115,38 @@ function generateChain(k, n) {
 
 // --- Execution ---
 
-// Case 1: k=3
-const R1 = [
-    { A1: 1, A2: 10 }, { A1: 2, A2: 20 }, { A1: 3, A2: 30 }, { A1: 4, A2: 40 }, { A1: 5, A2: 50 }
-];
-const R2 = [
-    { A2: 10, A3: 100 }, { A2: 20, A3: 200 }, { A2: 40, A3: 400 }, { A2: 50, A3: 501 }, { A2: 60, A3: 600 }
-];
-const R3 = [
-    { A3: 100, A4: 1000 }, { A3: 200, A4: 2000 }, { A3: 200, A4: 2001 }, { A3: 400, A4: 4000 }, { A3: 700, A4: 7000 }
-];
+if (require.main === module) {
+    // Case 1: k=3
+    const R1 = [
+        { A1: 1, A2: 10 }, { A1: 2, A2: 20 }, { A1: 3, A2: 30 }, { A1: 4, A2: 40 }, { A1: 5, A2: 50 }
+    ];
+    const R2 = [
+        { A2: 10, A3: 100 }, { A2: 20, A3: 200 }, { A2: 40, A3: 400 }, { A2: 50, A3: 501 }, { A2: 60, A3: 600 }
+    ];
+    const R3 = [
+        { A3: 100, A4: 1000 }, { A3: 200, A4: 2000 }, { A3: 200, A4: 2001 }, { A3: 400, A4: 4000 }, { A3: 700, A4: 7000 }
+    ];
 
-const results3 = generalizedLineJoin([R1, R2, R3]);
-console.log(`k=3 Results: ${results3.length} tuples found.`);
-if (results3.length < 20) console.table(results3);
-
-
-// Case 2: k=5
-console.log("\nGenerating data for k=5...");
-const rels5 = generateChain(5, 10);
-const results5 = generalizedLineJoin(rels5);
-console.log(`k=5 Results: ${results5.length} tuples found.`);
-// Sample output
-if (results5.length > 0) console.log("Sample result:", results5[0]);
+    const results3 = generalizedLineJoin([R1, R2, R3]);
+    console.log(`k=3 Results: ${results3.length} tuples found.`);
+    if (results3.length < 20) console.table(results3);
 
 
-// Case 3: k=9
-console.log("\nGenerating data for k=9...");
-const rels9 = generateChain(9, 20);
-const results9 = generalizedLineJoin(rels9);
-console.log(`k=9 Results: ${results9.length} tuples found.`);
-if (results9.length > 0) console.log("Sample result:", results9[0]);
+    // Case 2: k=5
+    console.log("\nGenerating data for k=5...");
+    const rels5 = generateChain(5, 10);
+    const results5 = generalizedLineJoin(rels5);
+    console.log(`k=5 Results: ${results5.length} tuples found.`);
+    // Sample output
+    if (results5.length > 0) console.table(results5);
+
+
+    // Case 3: k=9
+    console.log("\nGenerating data for k=9...");
+    const rels9 = generateChain(9, 20);
+    const results9 = generalizedLineJoin(rels9);
+    console.log(`k=9 Results: ${results9.length} tuples found.`);
+    if (results9.length > 0) console.table(results9);
+}
+
+module.exports = { generalizedLineJoin };
