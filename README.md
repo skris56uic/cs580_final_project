@@ -2,6 +2,11 @@
 
 This repository contains implementations of various database join algorithms and query evaluation techniques, including Hash Join, Yannakakis Algorithm, Sequential Join, Generic Join (WCOJ), and Hypertree Width decompositions.
 
+## Team Members
+
+*   Shri Krishna
+*   Varun Khalate
+
 ## Project Structure
 
 The project is organized into folders corresponding to each problem statement. Each folder contains the solution code and a detailed report.
@@ -63,3 +68,5 @@ Each folder contains a `Report.pdf` file that provides:
 *   Pseudocode (where applicable).
 *   Asymptotic complexity analysis.
 *   Experimental results and performance comparisons.
+
+
