@@ -1,9 +1,7 @@
-// Problem 6: SQL Dataset Generation
-
 const fs = require('fs');
 const path = require('path');
 
-// --- Dataset Generation (Same as Problem 5) ---
+// --- Dataset Generation ---
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -71,8 +69,8 @@ function generateSQL() {
     sqlContent += "INSERT INTO R3 (A3, A4) VALUES\n";
     sqlContent += R3.map(t => `(${t.A3}, ${t.A4})`).join(",\n") + ";\n";
 
-    fs.writeFileSync(path.join(__dirname, 'solution_6_dataset.sql'), sqlContent);
-    console.log("Generated solution_6_dataset.sql");
+    fs.writeFileSync(path.join(__dirname, 'Solution_dataset.sql'), sqlContent);
+    console.log("Generated Solution_dataset.sql");
 
     // Generate Query File
     const queryContent = `
@@ -82,8 +80,8 @@ FROM R1
 JOIN R2 ON R1.A2 = R2.A2
 JOIN R3 ON R2.A3 = R3.A3;
 `;
-    fs.writeFileSync(path.join(__dirname, 'solution_6_query.sql'), queryContent);
-    console.log("Generated solution_6_query.sql");
+    fs.writeFileSync(path.join(__dirname, 'Solution_query.sql'), queryContent);
+    console.log("Generated Solution_query.sql");
 }
 
 generateSQL();
